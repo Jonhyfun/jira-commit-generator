@@ -1,0 +1,12 @@
+{
+  "name": "Jira-Commit-Generator",
+  "version": "1",
+  "description": "Gerar commits do jira e padronizados pro NV99",
+  "main": "commit.js",
+  "author": "Jotape Corporation",
+  "license": "MIT",
+  "dependencies": {
+    "console-png": "^1.2.1",
+    "git-commit-msg-linter": "^4.1.2"
+  }
+}
