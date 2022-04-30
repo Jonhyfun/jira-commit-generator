@@ -12,30 +12,51 @@ const readLineInterface = readline.createInterface({
   output: process.stdout
 });
 
+function defaultExecCallback(error, stdout, stderr, callback) {
+  console.log('\n', error?.message ?? stderr ?? stdout);
+  if(callback) callback();
+  return;
+}
+
 function readLine(query, callback) {
-    let response;
-
-    readLineInterface.setPrompt(query);
-    readLineInterface.prompt();
-
-    readLineInterface.on('line', (userInput) => {
-        response = userInput;
-        readLineInterface.close();
-    });
-
-    readLineInterface.on('close', () => {
-        return callback(response);
-    });
+  let response;
+  
+  readLineInterface.setPrompt(query);
+  readLineInterface.prompt();
+  
+  readLineInterface.on('line', (userInput) => {
+    response = userInput;
+    readLineInterface.close();
+  });
+  
+  readLineInterface.on('close', () => {
+    return callback(response);
+  });
 }
 
 console.log("\x1b[0m")
 
+var currentSlice = 2
+var secondCommand;
+
+if(process.argv.slice(currentSlice)[0] === '-p') {
+  currentSlice = 3
+  secondCommand = 'git push'
+}
+
+if(!process.argv.slice(currentSlice).join(' ')) {
+  console.log('fatal: por favor escreva a mensagem do commit como argumento do comando')
+  process.exit();
+}
+
+
 readLine("Digite o código da task ou os códigos entre espaços (ie: FLOW-1234): ", ((prefix) => {
   
   const valid = /^\w+\-\d+$/.exec(prefix)
-
+  
   if(!valid) return console.log('fatal: código invalido (certifique-se de que é uma palavra, traço e um número)');
-
+  
+  
   const { stdin } = process;
   
   stdin.setRawMode(true);
@@ -62,9 +83,11 @@ readLine("Digite o código da task ou os códigos entre espaços (ie: FLOW-1234)
 
     console.log('\n')
     console.png(require('fs').readFileSync(__dirname + '/logo.png'));
-    exec(`git commit -m "${prefix.toUpperCase()} ${messagePrefixes[parseInt(key-1)].split(' ')[0]}: ${process.argv.slice(2).join(' ')}"`, (error, stdout, stderr) => {
-    console.log('\n', error?.message ?? stderr ?? stdout);
-    process.exit();
+    exec(`git commit -m "${messagePrefixes[parseInt(key-1)].split(' ')[0]}: ${process.argv.slice(currentSlice).join(' ')} [${prefix.toUpperCase()}]"`, (error, stdout, stderr) => {
+      defaultExecCallback(error, stdout, stderr, () => {
+        if(secondCommand) exec(secondCommand, defaultExecCallback)
+      })
+      process.exit();
     });
   })
 
