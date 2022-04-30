@@ -1,6 +1,6 @@
 {
   "name": "Jira-Commit-Generator",
-  "version": "1",
+  "version": "1.0.1",
   "description": "Gerar commits do jira e padronizados pro NV99",
   "main": "commit.js",
   "author": "Jotape Corporation",
