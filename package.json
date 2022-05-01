@@ -1,6 +1,6 @@
 {
   "name": "@jonhyfun/jira-commit-generator",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Gerar commits do jira e padronizados pro NV99",
   "main": "commit.js",
   "author": "Jotape Corporation",
