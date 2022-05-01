@@ -2,7 +2,7 @@
   "name": "@jonhyfun/jira-commit-generator",
   "version": "1.0.5",
   "description": "Gerar commits do jira e padronizados pro NV99",
-  "main": "commit.js",
+  "main": "index.js",
   "author": "Jotape Corporation",
   "license": "MIT",
   "dependencies": {
@@ -21,7 +21,5 @@
     "url": "https://github.com/Jonhyfun/jira-commit-generator/issues"
   },
   "homepage": "https://github.com/Jonhyfun/jira-commit-generator#readme",
-  "bin": {
-    "commit": "./commit.js"
-  }
+  "bin": "commit"
 }
