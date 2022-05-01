@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 require('console-png').attachTo(console);
 const readline = require('readline');
 const { exec } = require("child_process");

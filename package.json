@@ -1,5 +1,5 @@
 {
-  "name": "Jira-Commit-Generator",
+  "name": "@jonhyfun/jira-commit-generator",
   "version": "1.0.3",
   "description": "Gerar commits do jira e padronizados pro NV99",
   "main": "commit.js",
@@ -8,5 +8,20 @@
   "dependencies": {
     "console-png": "^1.2.1",
     "git-commit-msg-linter": "^4.1.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jonhyfun/jira-commit-generator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Jonhyfun/jira-commit-generator/issues"
+  },
+  "homepage": "https://github.com/Jonhyfun/jira-commit-generator#readme",
+  "bin": {
+    "commit": "node commit.js"
   }
 }
