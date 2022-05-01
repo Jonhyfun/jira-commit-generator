@@ -38,21 +38,20 @@ var args = [];
 process.argv.slice(currentSlice).some((arg) => {
   if(arg[0] === '-') {
     args.push(arg)
+    currentSlice += 1
   }
   else {
     return true
   }
 })
 
-if(args.length > 1) {
+if(args.length > 0) {
   args.forEach((arg) => {
       if(arg[1] === 'a') {
         firstCommand = 'git add . &&'
-        currentSlice += 1
       }
       if(arg[1] === 'p') {
         secondCommand += '&& git push'
-        currentSlice += 1
       }
   })
 }
