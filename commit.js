@@ -45,7 +45,6 @@ process.argv.slice(currentSlice).some((arg) => {
 })
 
 if(args.length > 1) {
-  currentSlice += 1
   args.forEach((arg) => {
       if(arg[1] === 'a') {
         firstCommand = 'git add . &&'
