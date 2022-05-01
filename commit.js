@@ -96,7 +96,7 @@ readLine("Digite o código da task ou os códigos entre espaços (ie: FLOW-1234)
     console.log('\n')
     console.png(require('fs').readFileSync(__dirname + '/logo.png'));
     exec(`${firstCommand} git commit -m "${messagePrefixes[parseInt(key-1)].split(' ')[0]}: ${process.argv.slice(currentSlice).join(' ')} [${prefix.toUpperCase()}]" ${secondCommand}`, (error, stdout, stderr) => {
-      console.log('\n', error?.message, stderr, stdout);
+      console.log('\n', error?.message ?? '', stderr ?? '', stdout ?? '');
       process.exit()
     });
   })
