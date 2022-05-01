@@ -32,12 +32,32 @@ console.log("\x1b[0m")
 
 var currentSlice = 2
 var secondCommand = '';
+var firstCommand = '';
 
-if(process.argv.slice(currentSlice)[0] === '-p') {
-  currentSlice = 3
-  secondCommand = '&& git push'
+var args = [];
+process.argv.slice(currentSlice).some((arg) => {
+  if(arg[0] === '-') {
+    args.push(arg)
+  }
+  else {
+    return true
+  }
+})
+
+if(args.length > 1) {
+  currentSlice += 1
+  args.forEach((arg) => {
+      if(arg[1] === 'a') {
+        firstCommand = 'git add . &&'
+        currentSlice += 1
+      }
+      if(arg[1] === 'p') {
+        secondCommand += '&& gitpush'
+        currentSlice += 1
+      }
+  })
 }
-
+  
 if(!process.argv.slice(currentSlice).join(' ')) {
   console.log('fatal: por favor escreva a mensagem do commit como argumento do comando')
   process.exit();
@@ -77,8 +97,9 @@ readLine("Digite o código da task ou os códigos entre espaços (ie: FLOW-1234)
 
     console.log('\n')
     console.png(require('fs').readFileSync(__dirname + '/logo.png'));
-    exec(`git commit -m "${messagePrefixes[parseInt(key-1)].split(' ')[0]}: ${process.argv.slice(currentSlice).join(' ')} [${prefix.toUpperCase()}]" ${secondCommand}`, (error, stdout, stderr) => {
-      console.log('\n', error?.message ?? stderr ?? stdout);
+    exec(`${firstCommand} git commit -m "${messagePrefixes[parseInt(key-1)].split(' ')[0]}: ${process.argv.slice(currentSlice).join(' ')} [${prefix.toUpperCase()}]" ${secondCommand}`, (error, stdout, stderr) => {
+      console.log('\n', error?.message, stderr, stdout);
+      process.exit()
     });
   })
 
