@@ -52,7 +52,7 @@ if(args.length > 1) {
         currentSlice += 1
       }
       if(arg[1] === 'p') {
-        secondCommand += '&& gitpush'
+        secondCommand += '&& git push'
         currentSlice += 1
       }
   })
