@@ -66,7 +66,7 @@ if(!process.argv.slice(currentSlice).join(' ')) {
 
 readLine("Digite o código da task ou os códigos entre espaços (ie: FLOW-1234): ", ((prefix) => {
   
-  const valid = /^\w+\-\d+$/.exec(prefix)
+  const valid = prefix.split(' ').every(splittedPrefix => !!(/^\w+\-\d+$/.exec(splittedPrefix)));
   
   if(!valid) return console.log('fatal: código invalido (certifique-se de que é uma palavra, traço e um número)');
   
